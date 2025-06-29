@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Criar Ingrediente - Sistema de Nutrição</title>
+  <link rel="stylesheet" href="/css/CriarIngrediente.css">
+  <link rel="stylesheet" href="/css/navbar.css">
+</head>
+<body>
+
+<header class="header">
+  <div class="logo-container">
+    <img src="/images/logo.png" alt="Logo Nutrição" class="logo">
+    <h1>Sistema de Nutrição</h1>
+  </div>
+  <button type="button" class="navbar-btn" onclick="window.location.href='/criarFichaTecnica'">Voltar</button>
+</header>
+
+<div class="container">
+  <span class="titulo-formulario">Criar Novo Ingrediente</span>
+
+  <form id="ingredienteForm" th:action="@{/ingredientes/criar}" method="post">
+    <section class="section">
+      <h2 class="section-title">📝 Informações Básicas</h2>
+      <div class="section-content">
+        <div class="form-row">
+          <div class="form-group">
+            <label for="nome">Nome do Ingrediente:</label>
+            <input type="text" id="nome" name="nome" required placeholder="Ex: Frango, Arroz, Batata...">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <h2 class="section-title">🍎 Informações Nutricionais (por 100g)</h2>
+      <div class="section-content">
+        <div class="grid-4">
+          <div class="form-group">
+            <label for="proteina">Proteína (g):</label>
+            <input type="number" id="proteina" name="proteina" step="0.01" min="0" required placeholder="0.00">
+          </div>
+          <div class="form-group">
+            <label for="carboidrato">Carboidrato (g):</label>
+            <input type="number" id="carboidrato" name="carboidrato" step="0.01" min="0" required placeholder="0.00">
+          </div>
+          <div class="form-group">
+            <label for="lipidio">Lipídio (g):</label>
+            <input type="number" id="lipidio" name="lipidio" step="0.01" min="0" required placeholder="0.00">
+          </div>
+          <div class="form-group">
+            <label for="sodio">Sódio (mg):</label>
+            <input type="number" id="sodio" name="sodio" step="0.01" min="0" required placeholder="0.00">
+          </div>
+          <div class="form-group">
+            <label for="gorduraSaturada">Gordura Saturada (g):</label>
+            <input type="number" id="gorduraSaturada" name="gorduraSaturada" step="0.01" min="0" required placeholder="0.00">
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="section">
+      <div class="section-content">
+        <div class="form-actions">
+          <button type="submit" class="btn btn-primary">Criar Ingrediente</button>
+          <button type="button" class="btn btn-secondary" onclick="limparFormulario()">Limpar Formulário</button>
+        </div>
+      </div>
+    </section>
+  </form>
+</div>
+
+<script>
+  // **Função para limpar o formulário**
+  function limparFormulario() {
+    document.getElementById('ingredienteForm').reset();
+  }
+
+  // **Capturar o evento de submit do formulário**
+  document.getElementById('ingredienteForm').addEventListener('submit', function(e) {
+    e.preventDefault(); // Previne o envio padrão do formulário (o que o th:action faria)
+
+    // **Coleta os valores dos campos do formulário**
+    const nome = document.getElementById('nome').value.trim();
+    const proteina = parseFloat(document.getElementById('proteina').value);
+    const carboidrato = parseFloat(document.getElementById('carboidrato').value);
+    const lipidio = parseFloat(document.getElementById('lipidio').value);
+    const sodio = parseFloat(document.getElementById('sodio').value);
+    const gorduraSaturada = parseFloat(document.getElementById('gorduraSaturada').value);
+
+    // **Validação básica no frontend**
+    if (nome === '') {
+      alert('Por favor, preencha o nome do ingrediente.');
+      return;
+    }
+
+    // Validar se todos os valores nutricionais são números válidos e não negativos
+    const camposNumericos = [
+      { id: 'proteina', nomeDisplay: 'Proteína' },
+      { id: 'carboidrato', nomeDisplay: 'Carboidrato' },
+      { id: 'lipidio', nomeDisplay: 'Lipídio' },
+      { id: 'sodio', nomeDisplay: 'Sódio' },
+      { id: 'gorduraSaturada', nomeDisplay: 'Gordura Saturada' }
+    ];
+
+    for (const campo of camposNumericos) {
+      const valor = document.getElementById(campo.id).value;
+      if (valor === '' || isNaN(parseFloat(valor)) || parseFloat(valor) < 0) {
+        alert(`Por favor, preencha um valor válido (número não negativo) para ${campo.nomeDisplay}.`);
+        return;
+      }
+    }
+
+    // **Obtenção do username do nutricionista**
+    // IMPORTANTE: Em um ambiente real, o username do nutricionista logado deve ser obtido
+    // de forma segura, por exemplo, do contexto de segurança do Spring (se estiver usando Thymeleaf)
+    // ou de um token JWT após o login.
+    // Para fins de demonstração, estou usando um valor fixo.
+    // Adapte esta parte conforme sua lógica de autenticação.
+    const nutricionistaUsername = "nutricionista"; // <<< Substitua pelo username real do nutricionista logado
+
+    // **Prepara o objeto de dados para enviar ao backend**
+    const dadosIngrediente = {
+      nome: nome,
+      proteina: proteina,
+      carboidrato: carboidrato,
+      lipidio: lipidio,
+      sodio: sodio,
+      gorduraSaturada: gorduraSaturada,
+      // Não precisamos enviar id, nutricionistaId, nutricionistaUsername do frontend para a criação,
+      // pois eles serão gerados/preenchidos pelo backend.
+    };
+
+    // **Faz a requisição POST para o backend usando a Fetch API**
+    fetch(`/api/ingredientes/nutricionista/${nutricionistaUsername}`, {
+      method: 'POST', // Define o método HTTP como POST
+      headers: {
+        'Content-Type': 'application/json', // Indica que o corpo da requisição é JSON
+        // Se você tiver autenticação (ex: JWT), adicione o cabeçalho de autorização aqui:
+        // 'Authorization': 'Bearer SEU_TOKEN_DE_AUTENTICACAO_AQUI'
+      },
+      body: JSON.stringify(dadosIngrediente), // Converte o objeto JavaScript em uma string JSON
+    })
+            .then(response => {
+              // Verifica se a resposta HTTP foi bem-sucedida (status 2xx)
+              if (response.ok) {
+                return response.json(); // Se sim, parseia a resposta como JSON
+              }
+              // Se a resposta não foi OK, tenta ler o JSON de erro e lança uma exceção
+              return response.json().then(errorData => {
+                throw new Error(errorData.message || 'Erro desconhecido ao criar ingrediente.');
+              });
+            })
+            .then(data => {
+              // Lida com a resposta de sucesso do backend
+              console.log('Ingrediente criado com sucesso:', data);
+              alert('Ingrediente criado com sucesso!');
+              // Redireciona para outra página após o sucesso
+              window.location.replace('/criarFichaTecnica');
+            })
+            .catch(error => {
+              // Lida com erros na requisição ou na resposta
+              console.error('Erro ao enviar dados do ingrediente:', error);
+              alert('Erro ao criar ingrediente: ' + error.message);
+            });
+  });
+</script>
+
+</body>
+</html>

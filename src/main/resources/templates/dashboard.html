@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-BR"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fichas Técnicas de Nutrição</title>
+    <link rel="stylesheet" href="/css/dashboard.css">
+    <link rel="stylesheet" href="/css/navbar.css">
+</head>
+<body>
+<header class="header">
+    <div class="logo-container">
+        <img src="/images/logo.png" alt="Logo Nutrição" class="logo">
+        <h1>Fichas Técnicas de Nutrição</h1>
+    </div>
+    <form th:action="@{/logout}" method="post" style="display:inline;">
+        <button type="submit" class="navbar-btn">Logout</button>
+    </form>
+</header>
+
+<main class="container">
+
+    <div class="card visualizar">
+        <a href="/visualizar">
+            <div class="card-content" >
+                <div class="card-icon">
+                    <img src="images/view-icon.png" alt="Visualizar" class="icon">
+                </div>
+                <div class="card-text">
+                    <h2>Visualizar Fichas Técnicas</h2>
+                    <p>Visualize as fichas técnicas cadastradas no sistema</p>
+                </div>
+            </div>
+        </a>
+    </div>
+
+    <div class="card criar" sec:authorize="hasAnyAuthority('NUTRICIONISTA', 'ADMIN')">
+        <a href="/criarFichaTecnica">
+            <div class="card-content">
+                <div class="card-icon">
+                    <img src="images/create-icon.png" alt="Criar" class="icon">
+                </div>
+                <div class="card-text">
+                    <h2>Criar Ficha Técnica</h2>
+                    <p>Cadastre uma ficha ténica no sistema</p>
+                </div>
+            </div>
+        </a>
+    </div>
+</main>
+
+
+</body>
+</html>
