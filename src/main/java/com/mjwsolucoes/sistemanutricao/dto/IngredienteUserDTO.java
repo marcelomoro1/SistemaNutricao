@@ -1,4 +1,4 @@
-// src/main/java/com/mjwsolucoes/sistemanutricao/dto/IngredienteUserDTO.java
+
 package com.mjwsolucoes.sistemanutricao.dto;
 
 import jakarta.validation.constraints.NotBlank;
