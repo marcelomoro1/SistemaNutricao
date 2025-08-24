@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.io.Serializable; // Necessário para @IdClass
 
-// Definindo a chave composta
+//chave composta
 class Receita_Ingrediente_Id implements Serializable {
     private Long receitaId;
     private Long ingredienteId;
