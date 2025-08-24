@@ -8,23 +8,22 @@ import org.springframework.stereotype.Component;
 
 import static com.mjwsolucoes.sistemanutricao.model.Role.*;
 
-// A anotação @Component indica que esta classe é um componente gerenciado pelo Spring.
+//componente gerenciado pelo Spring.
 @Component
 public class DataInitializer implements CommandLineRunner {
 
-    // Repositório para interagir com a entidade Nutricionista no banco de dados.
+    
     private final UserRepository userRepository;
 
-    // Encoder para criptografar as senhas dos nutricionistas.
+    //criptografar as senhas dos nutricionistas.
     private final PasswordEncoder passwordEncoder;
 
-    // Construtor para injetar as dependências necessárias.
+    //injetar as dependências necessárias.
     public DataInitializer(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
-    // Método executado automaticamente ao iniciar a aplicação.
     @Override
     public void run (String... args) {
         // Verifica se o nutricionista "admin" já existe no banco de dados.
