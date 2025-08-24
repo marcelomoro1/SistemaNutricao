@@ -24,26 +24,26 @@ public class Receita {
     @Column(nullable = false)
     private CategoriaReceita categoria;
 
-    @Column(nullable = false, columnDefinition = "TEXT") // Pode ser um texto mais longo
+    @Column(nullable = false, columnDefinition = "TEXT") 
     private String modoPreparo;
 
     @Column(nullable = false)
-    private Integer tempoPreparo; // Continua Integer se for em minutos inteiros
+    private Integer tempoPreparo; 
 
     @Column(nullable = false)
-    private Double pesoPorcao; // Corrigido para Double
+    private Double pesoPorcao; 
 
     @Column(nullable = false)
-    private Double rendimento; // Corrigido para Double
+    private Double rendimento;
 
     @Column(nullable = false)
-    private String equipamentos; // Corrigido para minúscula e nullable = false
+    private String equipamentos;
 
     @Column(nullable = false)
     private Integer numeroPorcoes;
 
     @Column(nullable = false)
-    private Double fcc; // Corrigido para Double
+    private Double fcc; 
 
     @Column(nullable = false)
     private String medidaCaseira;
@@ -56,5 +56,5 @@ public class Receita {
     private PerfilNutricional perfilNutricional;
 
     @OneToMany(mappedBy = "receita", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<ReceitaIngrediente> ingredientesReceita = new ArrayList<>(); // Renomeado para clareza
+    private List<ReceitaIngrediente> ingredientesReceita = new ArrayList<>();
 }
