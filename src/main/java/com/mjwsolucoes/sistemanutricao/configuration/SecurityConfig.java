@@ -23,7 +23,6 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests(auth -> auth
                         // 1. ROTAS PÚBLICAS (acesso sem autenticação)
-                        // Inclua todas as páginas de "entrada", recursos estáticos e suporte.
                         .requestMatchers(
                                 "/",                // A raiz, que retorna 'index.html' (página de login)
                                 "/home",            // /home, que também retorna 'index.html'
@@ -35,7 +34,7 @@ public class SecurityConfig {
                                 "/support"          // Sua rota de suporte, se houver
                         ).permitAll()
 
-                        // 2. ROTAS PROTEGIDAS POR AUTORIDADE ESPECÍFICA (precisam estar logado E ter a role)
+                        // 2. ROTAS PROTEGIDAS POR AUTORIDADE ESPECÍFICA
                         .requestMatchers("/admin/**").hasAuthority("ADMIN")
                         // Ajustado para incluir o endpoint EXATO /fichatecnica, além do padrão /**
                         .requestMatchers("/fichatecnica", "/fichatecnica/**").hasAnyAuthority("NUTRICIONISTA", "ADMIN", "USER")
@@ -45,11 +44,9 @@ public class SecurityConfig {
 
 
                         // 3. ROTAS PROTEGIDAS POR AUTENTICAÇÃO (apenas precisa estar logado, qualquer role)
-                        // O dashboard é um exemplo típico de página que qualquer usuário logado deve ver
                         .requestMatchers("/dashboard").authenticated() // Protege explicitamente o dashboard
 
                         // 4. CATCH-ALL: Qualquer outra requisição que não foi explicitamente permitida acima, DEVE ser autenticada.
-                        // Esta é a regra de "default deny" (negar por padrão).
                         .anyRequest().authenticated()
                 )
                 .formLogin(form -> form
@@ -67,15 +64,14 @@ public class SecurityConfig {
                         .permitAll() // Permite acesso a todo o fluxo de login (GET e POST)
                 )
                 .logout(logout -> logout
-                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST")) // Mude para POST, é mais seguro
-                        // OU use .logoutUrl("/logout") se não quiser um matcher específico e quer o padrão POST
+                        .logoutRequestMatcher(new AntPathRequestMatcher("/logout", "POST")) 
                         .logoutSuccessUrl("/login?logout") // Redireciona para /login com um parâmetro de sucesso
                         .invalidateHttpSession(true) // Garante que a sessão seja invalidada
                         .deleteCookies("JSESSIONID") // Garante que o cookie de sessão seja removido
                         .permitAll() // Permite que a URL de logout seja acessada
                 )
-                .csrf(csrf -> csrf.disable()) // Desabilitado para dev, ATIVAR em produção!
-                .cors(cors -> cors.disable()); // Desabilitado para dev, CONFIGURAR em produção!
+                .csrf(csrf -> csrf.disable())
+                .cors(cors -> cors.disable());
 
         return http.build();
     }
