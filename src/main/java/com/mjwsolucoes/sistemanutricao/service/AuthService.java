@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.Optional;
 
-import static com.mjwsolucoes.sistemanutricao.model.Role.USER; // Importe apenas USER, se NUTRICIONISTA não for padrão de registro
+import static com.mjwsolucoes.sistemanutricao.model.Role.USER; 
 
 @Service
 public class AuthService {
@@ -37,7 +37,6 @@ public class AuthService {
         // Define a role como USER por padrão
         newUser.setRole(USER);
 
-        // Salva o novo usuário no banco de dados
         userRepository.save(newUser);
         return true;
     }
