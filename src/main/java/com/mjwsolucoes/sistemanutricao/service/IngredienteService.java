@@ -1,11 +1,11 @@
-// src/main/java/com/mjwsolucoes/sistemanutricao/service/IngredienteService.java
+
 package com.mjwsolucoes.sistemanutricao.service;
 
 import com.mjwsolucoes.sistemanutricao.dto.*;
 import com.mjwsolucoes.sistemanutricao.model.*;
 import com.mjwsolucoes.sistemanutricao.repository.*;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional; // Importe Transactional
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -60,7 +60,6 @@ public class IngredienteService {
         // Associa o objeto User nutricionista (e não apenas o ID)
         ingrediente.setNutricionista(nutricionista);
 
-        // Salva o ingrediente (agora uma instância de Ingrediente, não IngredienteNutricionista)
         Ingrediente salvo = ingredienteRepository.save(ingrediente);
 
         // Converte o ingrediente salvo de volta para IngredienteUserDTO para o retorno
@@ -74,7 +73,6 @@ public class IngredienteService {
                 .collect(Collectors.toList());
     }
 
-    // Método de conversão para IngredienteDTO (para listar ingredientes gerais)
     private IngredienteDTO convertToDTO(Ingrediente ingrediente) {
         IngredienteDTO dto = new IngredienteDTO();
         dto.setId(ingrediente.getId());
@@ -87,8 +85,6 @@ public class IngredienteService {
         return dto;
     }
 
-    // Método de conversão para IngredienteUserDTO (para listar/criar ingredientes de nutricionista)
-    // Este método substitui e absorve a lógica do antigo convertToDTO(IngredienteNutricionista)
     private IngredienteUserDTO convertToUserDTO(Ingrediente ingrediente) {
         IngredienteUserDTO dto = new IngredienteUserDTO();
         dto.setId(ingrediente.getId());
