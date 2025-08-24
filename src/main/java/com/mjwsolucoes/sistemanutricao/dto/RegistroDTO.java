@@ -15,5 +15,5 @@ public class RegistroDTO {
     private String password;
 
     @NotBlank(message = "Tipo de usuário é obrigatório")
-    private String role; // "NUTRICIONISTA" ou "ESTABELECIMENTO"
+    private String role; 
 }
