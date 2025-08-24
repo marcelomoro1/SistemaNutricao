@@ -1,8 +1,8 @@
-// src/main/java/com/mjwsolucoes/sistemanutricao/dto/PerfilNutricionalDTO.java
+
 package com.mjwsolucoes.sistemanutricao.dto;
 
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.PositiveOrZero; // Alterado para PositiveOrZero
+import jakarta.validation.constraints.PositiveOrZero;
 import lombok.Data;
 
 @Data
