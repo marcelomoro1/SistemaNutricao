@@ -11,8 +11,4 @@ public class ReceitaResumoDTO {
     private Integer numeroPorcoes;
     private Double totalKcal; // <-- MUDAR AQUI PARA DOUBLE
     private String nutricionistaUsername;
-
-    // Com o @Data do Lombok, você não precisa escrever o setter explicitamente.
-    // Ele já será gerado como: public void setTotalKcal(Double totalKcal) { this.totalKcal = totalKcal; }
-    // Pode remover o setter manual se o @Data estiver funcionando.
 }
