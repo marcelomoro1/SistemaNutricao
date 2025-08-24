@@ -8,13 +8,13 @@ import org.springframework.web.bind.annotation.*;
 @Controller
 public class AuthController {
 
-    private final AuthService authService; // Você ainda pode precisar do AuthService para o registro
+    private final AuthService authService;
 
     public AuthController(AuthService authService) {
         this.authService = authService;
     }
 
-    @GetMapping("/login") // Este é para exibir a página de login
+    @GetMapping("/login") 
     public String showLoginForm() {
         return "index";
     }
