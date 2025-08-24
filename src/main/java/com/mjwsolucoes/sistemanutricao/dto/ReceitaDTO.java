@@ -1,4 +1,4 @@
-// src/main/java/com/mjwsolucoes/sistemanutricao/dto/ReceitaDTO.java
+
 package com.mjwsolucoes.sistemanutricao.dto;
 
 import jakarta.validation.constraints.NotBlank;
@@ -40,13 +40,12 @@ public class ReceitaDTO {
     @Positive(message = "Número de porções deve ser positivo")
     private Integer numeroPorcoes;
 
-    private Double fcc; // Tipo Double no DTO
+    private Double fcc;
     private String medidaCaseira;
 
-    // Estes campos para o username/userId do nutricionista são preenchidos no serviço, não enviados pelo frontend
-    private Long userId; // Para resposta DTO, para que o frontend saiba o ID do nutricionista
-    private String nutricionistaUsername; // Para resposta DTO, para que o frontend saiba o username do nutricionista
+    private Long userId; 
+    private String nutricionistaUsername;
 
     private PerfilNutricionalDTO perfilNutricional;
-    private List<ReceitaIngredienteInputDTO> ingredientes; // Lista do DTO de input para ingredientes
+    private List<ReceitaIngredienteInputDTO> ingredientes;
 }
