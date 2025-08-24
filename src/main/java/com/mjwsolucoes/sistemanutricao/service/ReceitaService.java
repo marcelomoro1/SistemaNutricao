@@ -211,12 +211,10 @@ public class ReceitaService {
             ri.setPesoCompra(ingDTO.getPesoCompra());
             ri.setCustoUtilizado(ingDTO.getCustoUtilizado());
 
-            // Definir valores padrão ou calculados para custoTotal e custoPercapita,
-            // já que não vêm do DTO de entrada.
-            ri.setCustoTotal(0.0);       // Valor padrão, se não for calculado aqui
-            ri.setCustoPercapita(0.0);   // Valor padrão, se não for calculado aqui
+            ri.setCustoTotal(0.0);  
+            ri.setCustoPercapita(0.0);  
 
-            // Log para verificar os valores antes de salvar (útil para depuração)
+            // Log para verificar os valores antes de salvar
             System.out.println("Salvando ReceitaIngrediente para Receita ID: " + ri.getReceitaId() +
                     ", Ingrediente ID: " + ri.getIngredienteId() +
                     ", Peso Líquido: " + ri.getPesoLiquido());
