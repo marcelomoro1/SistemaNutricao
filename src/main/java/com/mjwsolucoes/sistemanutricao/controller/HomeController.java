@@ -44,10 +44,10 @@ public class HomeController {
         return "criarIngrediente";
     }
 
-    @GetMapping("/visualizar") // <-- URL ajustada para /visualizarFichaTecnica
-    public String visualizarFichas(Model model) { // <-- Adicionado 'Model model'
-        List<Receita> receitas = receitaRepository.findAll(); // <-- Busca as receitas
-        model.addAttribute("receitas", receitas); // <-- Adiciona a lista ao Model
+    @GetMapping("/visualizar") 
+    public String visualizarFichas(Model model) {
+        List<Receita> receitas = receitaRepository.findAll(); 
+        model.addAttribute("receitas", receitas); 
 
         return "visualizarFichaTecnica";
     }
