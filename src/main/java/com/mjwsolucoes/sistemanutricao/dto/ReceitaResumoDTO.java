@@ -9,6 +9,6 @@ public class ReceitaResumoDTO {
     private String categoria;
     private Integer tempoPreparo;
     private Integer numeroPorcoes;
-    private Double totalKcal; // <-- MUDAR AQUI PARA DOUBLE
+    private Double totalKcal; 
     private String nutricionistaUsername;
 }
