@@ -82,6 +82,7 @@ server.port=8080
 
 ## Banco de dados e carga de ingredientes
 O schema é criado automaticamente pelo Hibernate. Para popular a base de ingredientes do sistema, importe o arquivo `insert_ingredientes_final.sql` após o schema existir.
+O banco de dados foi criado a partir da tabela TACO.
 
 Exemplo via MySQL CLI:
 ```bash
