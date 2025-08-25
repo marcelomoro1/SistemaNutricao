@@ -2,6 +2,12 @@
 
 Aplicação web para criação, edição e visualização de fichas técnicas nutricionais de receitas. Voltada para nutricionistas, cozinhas profissionais e estabelecimentos que precisam padronizar preparações, calcular per capita, custos e perfil nutricional por porção.
 
+<div align="center">
+
+[![Assista ao vídeo](https://img.youtube.com/vi/9TaHt3Z3UpY/hqdefault.jpg)](https://www.youtube.com/watch?v=9TaHt3Z3UpY)
+
+</div>
+
 ### Objetivo
 Centralizar o cadastro de receitas com seus ingredientes, modo de preparo, equipamentos e cálculos (custo total, custo per capita, FCC e perfil nutricional), oferecendo interface web simples e API REST.
 
