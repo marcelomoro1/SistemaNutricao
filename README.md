@@ -4,10 +4,9 @@ Aplicação web para criação, edição e visualização de fichas técnicas nu
 
 <div align="center">
 
-[![Assista ao vídeo](https://img.youtube.com/vi/9TaHt3Z3UpY/hqdefault.jpg)](https://www.youtube.com/watch?v=9TaHt3Z3UpY)
+[![Assista ao vídeo](https://img.youtube.com/vi/YakVsN3qWi8/hqdefault.jpg)](https://www.youtube.com/watch?v=YakVsN3qWi8)
 
 </div>
-
 ### Objetivo
 Centralizar o cadastro de receitas com seus ingredientes, modo de preparo, equipamentos e cálculos (custo total, custo per capita, FCC e perfil nutricional), oferecendo interface web simples e API REST.
 
